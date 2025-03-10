@@ -7,7 +7,8 @@ const port = 3000;
 const moviesRouter = require('./routers/movieRouter');
 
 
-
+// importiamo il middleware di gestione path imgs
+const imagePath = require('./middlewares/imagePath');
 
 
 
@@ -20,6 +21,9 @@ app.use(express.static('public'));
 
 // registro il body-parser 
 app.use(express.json());
+
+// registro il middleware del path delle immagini
+app.use(imagePath);
 
 
 // definsco la prima rotta con un semplice messaggio
