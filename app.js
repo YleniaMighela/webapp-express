@@ -1,11 +1,10 @@
-// console.log("ciao");
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
 
 // salvo i file delle rotte in una costante per importarli
-// const postsRouter = require('./routers/postsRouter');
+const moviesRouter = require('./routers/movieRouter');
 
 
 
@@ -26,13 +25,13 @@ app.use(express.json());
 // definsco la prima rotta con un semplice messaggio
 app.get('/', (req, res) => {
 
-    res.send("Server del mio blog")
+    res.send("Server della web app")
 })
 
 
 
 //  invoco la rotta
-// app.use("/posts", postsRouter)
+app.use("/movies", moviesRouter)
 
 
 
