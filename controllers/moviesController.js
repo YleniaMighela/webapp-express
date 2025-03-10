@@ -20,7 +20,7 @@ function index(req, res) {
 
             return {
                 ...movie,
-                image: req.imagePath + movie.image
+                image: movie.image ? req.imagePath + movie.image : ""
             }
         })
 
