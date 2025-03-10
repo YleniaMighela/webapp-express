@@ -11,4 +11,8 @@ const movieController = require('../controllers/moviesController');
 // GET visualizzo tutti gli elementi posts/
 router.get('/', movieController.index);
 
+// show
+// GET visualizzo un unico elemento posts/:id
+router.get('/:id', movieController.show);
+
 module.exports = router;
