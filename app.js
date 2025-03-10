@@ -27,7 +27,7 @@ app.use(imagePath);
 
 
 // definsco la prima rotta con un semplice messaggio
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
 
     res.send("Server della web app")
 })
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 
 //  invoco la rotta
-app.use("/movies", moviesRouter)
+app.use("/api/movies", moviesRouter)
 
 
 
