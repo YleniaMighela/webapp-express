@@ -69,6 +69,9 @@ function show(req, res) {
             // aggiungo la prorpietà review ai film
             movie.reviews = reviewResult;
 
+            // aggiungo il path alle recensioni
+            movie.image = req.imagePath + movie.image
+
             // ritorno l'oggetto aggiornato
             res.json(movie);
 
