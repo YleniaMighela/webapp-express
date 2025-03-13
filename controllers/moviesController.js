@@ -32,7 +32,7 @@ function index(req, res) {
 }
 
 
-// show
+// SHOW
 // GET visualizzo un unico elemento posts/:id
 function show(req, res) {
 
@@ -89,6 +89,27 @@ function show(req, res) {
 };
 
 
+// SHOW
+// POST inserisce un nuovo dato
+function storeReview(req, res) {
+    // salviamo in una costante il valore dell'id dai params
+    const { id } = req.params;
+
+    // salviamo in una costante il valore delle restanti informazioni del body
+    const { text, name, vote } = req.body;
+
+
+    // salvo la query in una coostante, Values sono con il segnaposto perchè verranno controollate durante l'esecuzione della query (prepared statements)
+    const insertReviewSql = 'INSERT INTO reviews (text, name, vote, movie_id) VALUES (?, ?, ?, ?)'
+
+    // Eseguiamo la query
+    connection.query(insertReviewSql, [text, name, vote, id], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        res.status(201);
+        res.json({ message: 'Review added', id: results.insertId });
+    });
+
+};
 
 // esporto i controller
-module.exports = { index, show }
+module.exports = { index, show, storeReview }

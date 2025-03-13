@@ -15,4 +15,8 @@ router.get('/', movieController.index);
 // GET visualizzo un unico elemento posts/:id
 router.get('/:id', movieController.show);
 
+// show
+// POST visualizzo il nuovo dato
+router.post('/:id/reviews', movieController.storeReview);
+
 module.exports = router;
