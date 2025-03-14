@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router();
 
+// importo il middleware per gestire il file
+const upload = require('../middlewares/multer');
+
 // importo il controller
 const movieController = require('../controllers/moviesController');
 
@@ -11,12 +14,18 @@ const movieController = require('../controllers/moviesController');
 // GET visualizzo tutti gli elementi posts/
 router.get('/', movieController.index);
 
-// show
+
 // GET visualizzo un unico elemento posts/:id
 router.get('/:id', movieController.show);
 
-// show
+
 // POST visualizzo il nuovo dato
 router.post('/:id/reviews', movieController.storeReview);
+
+
+// STORE visualizzo il nuovo dato
+router.post('/', upload.single('image'), movieController.store);
+
+
 
 module.exports = router;

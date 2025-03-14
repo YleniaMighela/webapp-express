@@ -37,6 +37,7 @@ function index(req, res) {
 function show(req, res) {
 
 
+
     // salviamo in una costante il valore dell'id dai params
     const { id } = req.params;
 
@@ -78,14 +79,35 @@ function show(req, res) {
         });
 
     });
+};
 
 
 
+// store
+// POST creo un nuovo elemento 
+function store(req, res, next) {
+    const { title, director, genre, abstract } = req.body;
 
+    // gestiamo il valore del nome file creato dal middleware
+    const imageName = `${req.file.filename}`;
 
+    // salvo la query in una coostante, Values sono con il segnaposto perchè verranno controllate durante l'esecuzione della query (prepared statements)
+    const query = "INSERT INTO movies (title, director, genre, image, abstract) VALUES (?, ?, ?, ?, ?)";
 
+    // Eseguiamo la query
+    connection.query(query,
+        [title, director, genre, imageName, abstract],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+                return next(new Error("Errore interno del server"));
+            }
 
-
+            res.status(201).json({
+                status: "success",
+                message: "Film creato con successo!",
+            });
+        })
 };
 
 
@@ -112,4 +134,4 @@ function storeReview(req, res) {
 };
 
 // esporto i controller
-module.exports = { index, show, storeReview }
+module.exports = { index, show, storeReview, store }
